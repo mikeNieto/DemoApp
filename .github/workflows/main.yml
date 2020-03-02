@@ -20,7 +20,7 @@ jobs:
       
     - name: Build with Gradle
       working-directory: ./backend
-      run: pwd && ./gradlew build
+      run: ./gradlew build
 
     - name: yarn build
       working-directory: ./frontend
