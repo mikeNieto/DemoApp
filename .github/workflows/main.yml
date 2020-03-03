@@ -28,7 +28,7 @@ jobs:
       working-directory: ./backend
       run: ./gradlew jib
       env: 
-        buildVersion: ${$(git rev-parse --short "$GITHUB_SHA")}
+        buildVersion: $GITHUB_SHA
 
     - name: yarn build
       working-directory: ./frontend
