@@ -5,8 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      buildVersion: $(echo ${GITHUB_SHA} | cut -c1-8)
 
     steps:
     - uses: actions/checkout@v2
@@ -28,7 +26,9 @@ jobs:
       
     - name: Build with Gradle
       working-directory: ./backend
-      run: ./gradlew jib
+      run: |
+          export buildVersion=${GITHUB_SHA::8}
+          ./gradlew jib
 
     - name: yarn build
       working-directory: ./frontend
