@@ -30,12 +30,6 @@ jobs:
           export buildVersion=stage
           ./gradlew jib
 
-    - name: yarn build
-      working-directory: ./frontend
-      run: |
-          yarn install
-          yarn build
-
     - name: Frontend docker build
       working-directory: ./frontend
       run: |
