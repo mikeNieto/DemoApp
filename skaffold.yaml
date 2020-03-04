@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: demoapp
+build:
+  artifacts:
+  - image: mikenieto/frontend
+    context: frontend
+deploy:
+  kubectl:
+    manifests:
+    - frontend/k8s/Deployment.yaml
