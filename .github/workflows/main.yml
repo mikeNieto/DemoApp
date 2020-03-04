@@ -27,7 +27,7 @@ jobs:
     - name: Build with Gradle
       working-directory: ./backend
       run: |
-          export buildVersion=${GITHUB_SHA::8}
+          export buildVersion=stage
           ./gradlew jib
 
     - name: yarn build
@@ -35,3 +35,9 @@ jobs:
       run: |
           yarn install
           yarn build
+
+    - name: Frontend docker build
+      working-directory: ./frontend
+      run: |
+        docker build -t mikenieto/frontend:stage .
+        docker push mikenieto/frontend:stage
