@@ -32,7 +32,9 @@ jobs:
 
     - name: Build forntend app
       working-directory: ./frontend
-      run: yarn build
+      run: |
+        yarn install
+        yarn build
 
     - name: Frontend docker build
       working-directory: ./frontend
