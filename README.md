@@ -1,3 +1,3 @@
 # DemoApp
 
-![CI](https://github.com/mikeNieto/DemoApp/workflows/CI/badge.svg?branch=master)
+![build-master](https://github.com/mikeNieto/DemoApp/workflows/build-master/badge.svg?branch=master)
