@@ -1,4 +1,4 @@
-name: Stage-build
+name: build-master
 
 on:
   push:
@@ -27,19 +27,19 @@ jobs:
       working-directory: ./backend
       run: chmod +x gradlew
       
-    - name: Build with Gradle
+    - name: Build backend app and create docker
       working-directory: ./backend
       run: |
           export buildVersion=stage
           ./gradlew jib
 
-    - name: Build forntend app
+    - name: Build frontend app
       working-directory: ./frontend
       run: |
         yarn install
         yarn build
 
-    - name: Frontend docker build
+    - name: Build frontend docker
       working-directory: ./frontend
       run: |
         docker build -t mikenieto/frontend:stage .
