@@ -78,4 +78,6 @@ jobs:
         curl http://localhost:9090
     - name: Run cypress test
       working-directory: ./frontend
-      run: yarn cypress:run
+      run: |
+        yarn install
+        yarn cypress:run
