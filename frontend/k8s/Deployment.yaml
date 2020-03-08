@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: mikenieto/frontend
+        image: mikenieto/frontend:stage
         resources:
           requests:
             memory: "32Mi"
