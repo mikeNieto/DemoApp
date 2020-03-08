@@ -72,3 +72,5 @@ jobs:
         kubectl get nodes
         kubectl apply -f Deployment.yaml
         kubectl get all
+        nohup kubectl port-forward service/frontend-service 90:80 &
+        curl http://localhost:90
