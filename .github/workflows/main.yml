@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,6 +33,18 @@ jobs:
           export buildVersion=stage
           ./gradlew jib
 
+  build-fronend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+        
+    - name: Login to Docker hub Registry
+      run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          
     - name: Build frontend app
       working-directory: ./frontend
       run: |
@@ -45,6 +57,7 @@ jobs:
         docker build -t mikenieto/frontend:stage .
         docker push mikenieto/frontend:stage
 
+
   minikube-test:
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +67,12 @@ jobs:
           minikube version: 'v1.5.2'
           kubernetes version: 'v1.16.2'
     - name: Interact with the cluster
+      working-directory: ./frontend/k8s
       run: |
-        kubectl get nodes
-        kubectl get all
-
+        sudo apt-get update && sudo apt-get install socat
+        kubectl apply -f Deployment.yaml
+        kubectl wait --for=condition=Ready pod/$(kubectl get pod -l app=frontend -o jsonpath={.items[0].metadata.name})
+        nohup kubectl port-forward service/frontend-service 9090:80 &
+        kubectl get pods -l app=frontend
+        sleep 5
+        curl http://localhost:9090
