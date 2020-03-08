@@ -70,7 +70,7 @@ jobs:
       working-directory: ./frontend/k8s
       run: |
         kubectl apply -f Deployment.yaml
-        kubectl get pods -l app=frontend
-        kubectl wait --for=condition=Ready pod/$(kubectl get pod -l app=frontend -o jsonpath={.items[0].metadata.name})
         nohup kubectl port-forward service/frontend-service 9090:80 &
+        kubectl wait --for=condition=Ready pod/$(kubectl get pod -l app=frontend -o jsonpath={.items[0].metadata.name})
+        kubectl get pods -l app=frontend
         curl http://localhost:9090
