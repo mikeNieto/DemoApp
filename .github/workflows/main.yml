@@ -69,6 +69,7 @@ jobs:
     - name: Interact with the cluster
       working-directory: ./frontend/k8s
       run: |
+        apt-get install socat
         kubectl apply -f Deployment.yaml
         kubectl wait --for=condition=Ready pod/$(kubectl get pod -l app=frontend -o jsonpath={.items[0].metadata.name})
         nohup kubectl port-forward service/frontend-service 9090:80 &
