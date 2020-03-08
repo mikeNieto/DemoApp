@@ -54,7 +54,9 @@ jobs:
           minikube version: 'v1.5.2'
           kubernetes version: 'v1.16.2'
     - name: Interact with the cluster
+      working-directory: ./frontend/k8s
       run: |
         kubectl get nodes
+        kubectl apply -f Deployment.yaml
         kubectl get all
 
