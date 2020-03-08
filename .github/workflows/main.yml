@@ -48,14 +48,13 @@ jobs:
   minikube-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: opsgang/ga-setup-minikube@v0.1.1
+    - uses: actions/checkout@v2
+    - uses: manusa/actions-setup-minikube@v1.0.0
       with:
-        minikube-version: 1.4.0
-        k8s-version: 1.15.1
-    - name: Testing
+          minikube version: 'v1.5.2'
+          kubernetes version: 'v1.16.2'
+    - name: Interact with the cluster
       run: |
-        minikube start --vm-driver kvm2
-        minikube update-context
-        kubectl cluster-info
-        kubectl get pods -n kube-system
+        kubectl get nodes
+        kubectl get all
+
