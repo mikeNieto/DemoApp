@@ -72,5 +72,6 @@ jobs:
         kubectl get nodes
         kubectl apply -f Deployment.yaml
         kubectl get all
+        while [[ $(kubectl get pods -l app=frontend -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') != "True" ]]; do echo "waiting for pod" && sleep 2; done
         nohup kubectl port-forward service/frontend-service 90:80 &
         curl http://localhost:90
