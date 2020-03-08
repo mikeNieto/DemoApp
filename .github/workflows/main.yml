@@ -79,5 +79,7 @@ jobs:
     - name: Run cypress test
       working-directory: ./frontend
       run: |
+        kubectl get pods -l app=frontend
+        curl http://localhost:9090
         yarn install
         yarn cypress:run
