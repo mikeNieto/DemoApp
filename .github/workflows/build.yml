@@ -31,4 +31,5 @@ jobs:
     - name: test
       run: |
         sudo apt-get update && sudo apt-get install socat
+        curl http://localhost:8080
         curl http://localhost:5000
