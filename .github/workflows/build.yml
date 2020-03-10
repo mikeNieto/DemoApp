@@ -29,5 +29,6 @@ jobs:
         nohup yarn start &
     
     - name: test
+      working-directory: ./frontend
       run: |
         yarn cypress:run
