@@ -20,10 +20,4 @@ jobs:
       
     - name: Build backend app
       working-directory: ./backend
-      run: ./gradlew build
-
-    - name: Build frontend app
-      working-directory: ./frontend
-      run: |
-        yarn install
-        yarn build
+      run: ./gradlew bootRun
