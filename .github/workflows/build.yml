@@ -20,12 +20,15 @@ jobs:
       
     - name: Build backend app
       working-directory: ./backend
-      run: nohup ./gradlew bootRun &
+      run: nohup ./gradlew build bootRun &
     
     - name: Run frontend
       working-directory: ./frontend
       run: |
         yarn install
-        yarn start
-
-      
+        nohup yarn start &
+    
+    - name: test
+      run: |
+        sudo apt-get update && sudo apt-get install socat
+        curl http://localhost:5000
