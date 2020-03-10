@@ -24,9 +24,5 @@ jobs:
     
     - name: Run frontend
       working-directory: ./frontend
-      run: nohup ./yarn start &
+      run: yarn start
       
-    - name: test
-      run: |
-        sudo apt-get update && sudo apt-get install socat
-        curl http://localhost:5000
