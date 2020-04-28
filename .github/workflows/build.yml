@@ -20,10 +20,15 @@ jobs:
       
     - name: Build backend app
       working-directory: ./backend
-      run: ./gradlew build
-
-    - name: Build frontend app
+      run: nohup ./gradlew build bootRun &
+    
+    - name: Run frontend
       working-directory: ./frontend
       run: |
         yarn install
-        yarn build
+        nohup yarn start &
+    
+    - name: test
+      working-directory: ./frontend
+      run: |
+        yarn cypress:run
